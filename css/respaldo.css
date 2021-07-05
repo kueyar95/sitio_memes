@@ -1,0 +1,24 @@
+/** Menú **/
+nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 4rem;
+}
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 4rem;
+    
+}
+nav ul li{
+    margin-right: 1rem;
+    
+}
+
+li{
+    list-style: none;
+}
+div a {
+    text-decoration: none;
+}
