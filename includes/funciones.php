@@ -1,5 +1,5 @@
 <?php
-    define('TEMPLATES_URL', __DIR__ . '/templates');
+    define('TEMPLATES_URL', __DIR__ . '/layout');
     define('FUNCIONES_URL', __DIR__ . 'funciones.php');
 
     function incluirTemplate(string $nombre, bool $inicio = false)
@@ -10,9 +10,7 @@
     function estaAutenticado() : bool {
         session_start();
 
-        // echo "<pre>";
-        // var_dump($_SESSION);
-        // echo "</pre>";
+        
         
         if($_SESSION['login']) {
             return true;
@@ -20,3 +18,11 @@
 
         return false;
     }
+
+    function debuguear($variable){
+         echo "<pre>";
+         var_dump($variable);
+         echo "</pre>";
+         exit;
+    }
+    

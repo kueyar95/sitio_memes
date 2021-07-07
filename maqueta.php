@@ -1,7 +1,10 @@
-<?php include_once './inc/layout/header.php' ?>
+<?php require 'includes/app.php';
+      incluirTemplate('header', $inicio = true);
+?>
+
   <main class="container-xl d-flex justify-content-center px-0 mx-0">
   
-  <?php include_once './inc/layout/sidebar_izquierda.php' ?>
+  <?php incluirTemplate('sidebar_izquierda', $inicio = true); ?>
     <div class="container d-flex flex-column px-0 mx-0 px-sm-0 mx-sm-0 px-lg px-xl-3 mx-xl-3">
       <h2 class="d-flex justify-content-center">Contenido Principal</h2>
       <article>
@@ -99,10 +102,10 @@
         </div>
       </article>
     </div>
-    <?php include_once './inc/layout/sidebar_derecha.php' ?>
-    <?php include_once './inc/layout/modalLogin.php' ?>
+    <?php incluirTemplate('sidebar_derecha', $inicio = true); ?>
+    <?php incluirTemplate('modalLogin', $inicio = true); ?>
   </main>
  
   <?php
-  include_once './inc/layout/footer.php'
+    incluirTemplate('footer', $inicio = true);
   ?>

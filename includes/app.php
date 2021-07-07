@@ -1,7 +1,9 @@
 <?php
     require 'funciones.php';
-    require './config/database.php';
-    require __DIR__ . '/../vendor/autoload.php';
+    require 'config/database.php';
+    require '../vendor/autoload.php';
     
+    use Model\Post;
 
+    $post = new Post;
 ?>
