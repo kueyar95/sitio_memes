@@ -5,11 +5,11 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-  <link rel="stylesheet" href="./css/normalize.css" />
-  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="../../public/build/css/normalize.css />
+  <link rel="stylesheet" href="../../public/build/css/style.css" />
   <script src="https://kit.fontawesome.com/7fb5970158.js" crossorigin="anonymous"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <title>Sitio memes</title>
 </head>
 
@@ -17,7 +17,7 @@
   <header>
     <nav class="navbar navbar-expand-md justify-content-between navbar-light bg-light">
       <div class="container d-flex justify-content-between">
-        <a class="navbar-brand mx-xl-5" href="index.html">
+        <a class="navbar-brand mx-xl-5" href="index.php">
           Pag. Memes
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#firstNavbar" aria-controls="firstNavbar" aria-expanded="false" aria-label="Toggle navigation">

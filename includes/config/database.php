@@ -2,7 +2,7 @@
 
 function conectarDb(): mysqli
 {
-    $db = mysqli_connect('localhost', 'root', '', 'bienesraices_crud');
+    $db = mysqli_connect('localhost', 'root', '', 'sitio_memes');
 
     if (!$db) {
         echo "Error: No se pudo conectar a MySQL.";
