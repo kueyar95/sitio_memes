@@ -1,3 +1,10 @@
+<?php
+if (!isset($_SESSION)) {
+  session_start();
+}
+$auth = $_SESSION['login'] ?? false;
+?>
+
 <!DOCTYPE html>
 <html lang="es" class="container mw-100 mx-0 px-0">
 
@@ -35,9 +42,13 @@
             <a class="nav-link" href="#"><i class="fas fa-search"></i></a>
             <a class="nav-link" href="#">▶️ Escucha</a>
             <a class="nav-link" href="#">🎨 Cambiar la paleta</a>
-            <a class="nav-link" data-toggle="modal" data-target="#loginModal">
-              Iniciar Sesión
-            </a> 
+            <?php if ($auth) : ?>
+              <a class="nav-link" href="cerrar_sesion.php">Cerrar Sesión</a>
+            <?php else : ?>
+              <a class="nav-link" data-toggle="modal" data-target="#loginModal">Iniciar Sesión</a>
+            <?php endif; ?>
+
+
           </div>
         </div>
       </div>

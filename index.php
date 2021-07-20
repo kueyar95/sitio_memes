@@ -12,8 +12,8 @@ incluirTemplate('header', $inicio = true);
 ?>
 
 <main class="container-xl d-flex justify-content-center px-0 mx-0">
-<?php var_dump($_SESSION);
-var_dump(session_id()); ?>
+<?php var_dump($_SESSION); ?>
+
   <?php incluirTemplate('sidebar_izquierda', $inicio = true); ?>
   <div class="container d-flex flex-column px-0 mx-0 px-sm-0 mx-sm-0 px-lg px-xl-3 mx-xl-3">
     <h2 class="d-flex justify-content-center">Contenido Principal</h2>

@@ -20,12 +20,15 @@ function enviarForm(e) {
     body: new FormData(e.target),
     
   })
-    .then(res => res)
-    .then(data =>{
-      console.log(data)
-    })
-}
-
+    .then(res => {
+      console.log(res);
+      if(res.ok){
+        window.location.href = '/Sitio_memes/index.php';
+      }
+    }
+    
+    )
+  }
 
 function imprimirAlerta(mensaje,tipo){
   //Crear el div
