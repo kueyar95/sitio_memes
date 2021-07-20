@@ -1,17 +1,19 @@
 <?php
+session_start();
 require 'includes/app.php';
 //Importante: Los requires e include se hacen en base al index del directorio raíz
 $db = conectarDb();
 
 //Consultar
-$query = "SELECT * FROM post";
+$query = "SELECT * FROM posts";
 $resultado = mysqli_query($db, $query);
 
 incluirTemplate('header', $inicio = true);
 ?>
 
 <main class="container-xl d-flex justify-content-center px-0 mx-0">
-
+<?php var_dump($_SESSION);
+var_dump(session_id()); ?>
   <?php incluirTemplate('sidebar_izquierda', $inicio = true); ?>
   <div class="container d-flex flex-column px-0 mx-0 px-sm-0 mx-sm-0 px-lg px-xl-3 mx-xl-3">
     <h2 class="d-flex justify-content-center">Contenido Principal</h2>
@@ -20,7 +22,7 @@ incluirTemplate('header', $inicio = true);
         <div>
           <div class="header_post d-flex mx-2">
             <a href="#" class="mx-2">
-              <img src="./img/imagen_perfil.webp" alt="" style="width: 20px; height: 20px" />
+              <img src="./public/build/img/imagen_perfil.webp" alt="" style="width: 20px; height: 20px" />
             </a>
             <p>Author del post</p>
           </div>

@@ -1,5 +1,7 @@
 <?php
+
 require '../../includes/app.php';
+estaAutenticado();
 incluirTemplate('header');
 $db = conectarDb();
 //echo "<pre>";

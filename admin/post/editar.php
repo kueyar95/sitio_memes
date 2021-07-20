@@ -1,4 +1,6 @@
 <?php
+require '../../includes/app.php';
+estaAutenticado();
 //Validar id
 $id = $_GET['id'];
 $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -8,7 +10,7 @@ if (!$id) {
 }
 
 //Incluir template
-require '../../includes/app.php';
+
 incluirTemplate('header');
 $db = conectarDb();
 //echo "<pre>";

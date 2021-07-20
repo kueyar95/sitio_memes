@@ -2,14 +2,14 @@
 
 //Importar la conexión
 require '../includes/app.php';
+estaAutenticado();
 $db = conectarDb();
 
 //Escribir el Query
-$query = "SELECT * FROM post";
+$query = "SELECT * FROM posts";
 
 //Conectar a la BD
 $resultadoConsulta = mysqli_query($db, $query);
-
 //Mostrar los resultados
 
 //Muestra mensaje condicional

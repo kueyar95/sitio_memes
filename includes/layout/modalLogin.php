@@ -8,16 +8,17 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        
+        <form method="POST" id="formLogin" action="./login.php">
           <div class="form-group">
-            <label for="exampleInputEmail1">Usuario</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            <small id="emailHelp" class="form-text text-muted">Nosotros no compartiremos tu correo con nadie.</small>
+
+            <label for="usuarioLogin">Usuario</label>
+            <input type="text" class="form-control" id="usuarioLogin" name="usuarioLogin">
           </div>
           <br>
           <div class="form-group">
-            <label for="exampleInputPassword1">Contraseña</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label for="passwordLogin">Contraseña</label>
+            <input type="text" class="form-control" id="passwordLogin" name="passwordLogin">
           </div>
           <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -26,7 +27,7 @@
           </div>
 
           <br>
-          <button type="submit" class="btn btn-primary">Entrar</button>
+          <button type="submit" class="btn btn-primary" id="btnLogin">Entrar</button>
 
         </form>
       </div>
@@ -47,14 +48,14 @@
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <label for="exampleInputEmail1">Usuario</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            
+            <label for="usuarioRegister">Usuario</label>
+            <input type="email" class="form-control" id="usuarioRegister" aria-describedby="emailHelp">
+
           </div>
 
           <div class="form-group">
-            <label for="exampleInputEmail1">Correo</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="emailRegister">Correo</label>
+            <input type="email" class="form-control" id="emailRegister" aria-describedby="emailHelp">
             <small id="emailHelp" class="form-text text-muted">Nosotros no compartiremos tu correo con nadie.</small>
           </div>
           <div class="form-group">

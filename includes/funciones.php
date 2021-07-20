@@ -7,11 +7,11 @@
         include TEMPLATES_URL . "/${nombre}.php";
     }
 
-    function estaAutenticado()   {
+    function estaAutenticado(){
         session_start();
 
         if(!$_SESSION['login']) {
-            header('Location: /');    
+            header('Location: /Sitio_memes/');    
         } 
     }
 
