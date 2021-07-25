@@ -21,11 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = filter_var($id, FILTER_VALIDATE_INT);
     if ($id) {
         //Elimina el archivo
-        $query = "SELECT nombreArchivo FROM post WHERE id = ${id}";
+        $query = "SELECT archivoPost FROM post WHERE id = ${id}";
         $resultado = mysqli_query($db, $query);
         $postDelete = mysqli_fetch_assoc($resultado);
 
-        unlink('../imagenes/' . $postDelete['nombreArchivo']);
+        unlink('../imagenes/' . $postDelete['archivoPost']);
 
         //Elimina la publicación
         $query = "DELETE FROM post WHERE id = ${id}";
@@ -59,8 +59,10 @@ incluirTemplate('header');
     <div class="contenedor">
         <h3 class="d-flex justify-content-center">Publicaciones tuyas</h3>
         <div class="container d-flex flex-column px-0 mx-0 px-sm-0 mx-sm-0 px-lg px-xl-3 mx-xl-3">
-            <?php while ($post = mysqli_fetch_assoc($resultadoConsulta)) : ?>
+            <?php while ($post = mysqli_fetch_assoc($resultadoConsulta)) :?>
                 <article>
+                    
+                
                     <div>
                         <div class="header_post d-flex mx-2">
                             <a href="#" class="mx-2">
@@ -69,7 +71,7 @@ incluirTemplate('header');
                             <p>Author del post</p>
                         </div>
 
-
+                    
                         <div class="d-flex justify-content-between">
                             <a href="#">
                                 <h3 class="mx-3"><?php echo $post['descripcion']; ?></h3>
@@ -97,7 +99,7 @@ incluirTemplate('header');
                     </div>
 
                     <div class="post_container bg-secondary d-flex justify-content-center">
-                        <img src="../imagenes/<?php echo $post['nombreArchivo']; ?>" class="img-fluid" alt="meme" />
+                        <img src="../imagenes/<?php echo $post['archivoPost']; ?>" class="img-fluid" alt="meme" />
                     </div>
                     <div class="mt-2 post_afterbar border rounded rounded-lg">
                         <button class="btn btn-outline-success" id="btn_up">

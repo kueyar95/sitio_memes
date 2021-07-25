@@ -12,7 +12,6 @@ incluirTemplate('header', $inicio = true);
 ?>
 
 <main class="container-xl d-flex justify-content-center px-0 mx-0">
-<?php var_dump($_SESSION); ?>
 
   <?php incluirTemplate('sidebar_izquierda', $inicio = true); ?>
   <div class="container d-flex flex-column px-0 mx-0 px-sm-0 mx-sm-0 px-lg px-xl-3 mx-xl-3">
@@ -32,7 +31,7 @@ incluirTemplate('header', $inicio = true);
         </div>
         <a href="./post.php?id=<?php echo $post['id']; ?>">
         <div class="post_container bg-secondary d-flex justify-content-center">
-          <img src="./imagenes/<?php echo $post['nombreArchivo']; ?>" class="img-fluid" alt="meme" />
+          <img src="./imagenes/<?php echo $post['archivoPost']; ?>" class="img-fluid" alt="meme" />
         </div>
         </a>
         <div class="mt-2 post_afterbar border rounded rounded-lg">

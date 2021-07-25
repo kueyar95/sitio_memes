@@ -43,7 +43,7 @@ $auth = $_SESSION['login'] ?? false;
             <a class="nav-link" href="#">▶️ Escucha</a>
             <a class="nav-link" href="#">🎨 Cambiar la paleta</a>
             <?php if ($auth) : ?>
-              <a class="nav-link" href="cerrar_sesion.php">Cerrar Sesión</a>
+              <a class="nav-link" href="/Sitio_memes/cerrar_sesion.php">Cerrar Sesión</a>
             <?php else : ?>
               <a class="nav-link" data-toggle="modal" data-target="#loginModal">Iniciar Sesión</a>
             <?php endif; ?>

@@ -1,18 +1,21 @@
 <?php
 
 require '../../includes/app.php';
+
+
+use App\Post;
+
 estaAutenticado();
 incluirTemplate('header');
 $db = conectarDb();
-//echo "<pre>";
-//echo var_dump($_POST);
-//echo "</pre>";
 
 //Arreglo con errores
-$errores = [];
+$errores = Post::getErrores();
 
 //Iniciar variables
+$nombreUsuarioPost = '';
 $nombreArchivo = '';
+$archivoPost = '';
 $descripcion = '';
 $tags = '';
 $checkSensitivo = '';
@@ -20,66 +23,40 @@ $fuentePost = '';
 
 //Ejecutar código luego de que el usuario envié el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //echo "<pre>";
-    //var_dump($_POST);
-    //var_dump($_FILES);
-    //echo "</pre>";
 
-    $descripcion = mysqli_real_escape_string($db, $_POST['descripcionPost']);
-    $tags = mysqli_real_escape_string($db, $_POST['tags']);
+    /**Subida de archivos */
+    $carpetaContPost = '../../imagenes/';
+    if (!is_dir($carpetaContPost)) {
+        mkdir($carpetaContPost);
+    }
 
+    //Generar nombre único para cada archivo
+    $nombreUnico = md5(uniqid(rand(), true)) . '.jpg';
+    
     //Asignar files a una variable
     $archivoPost = $_FILES['archivoPost'];
+    
+    //Obtener el nombre del archivo y luego agregarlo a $_POST
     $nombreArchivo = $archivoPost['name'];
+    $_POST['archivoPost'] = $nombreArchivo;
 
+    //Guardar en $_POST el nombre de usuario desde $_SESSION
+    $_POST['nombreUsuarioPost'] = $_SESSION['usuario'];
 
-    if (isset($_POST["checkSensitivo"])) {
-        $checkSensitivo = $_POST['checkSensitivo'];
-    } else {
-        $checkSensitivo = '0';
-    }
-    if (isset($_POST['fuentePost'])) {
-        $fuentePost = $_POST['fuentePost'];
-    } else {
-        $fuentePost = '0';
-    }
-
-    if (!$descripcion) {
-        $errores[] = 'Debes añadir una descripción';
-    }
-    if (!$tags) {
-        $errores[] = 'Debes añadir mínimo un tag';
-    }
-    if(!$nombreArchivo){
-        $errores = "El contenido de la publicación es obligatoria";
-    }
-    //echo "<pre>";
-    //echo var_dump($errores);
-    //echo "</pre>";
-
+    
+    //Instanciar la clase post
+    $publicacion = new Post($_POST);
     //Revisar que el arreglo de errores esté vacío
+    //Validar los datos
+    
+    $errores = $publicacion->validar();
     if (empty($errores)) {
-        /**Subida de archivos */
-        $carpetaContPost = '../../imagenes/';
-        if(!is_dir($carpetaContPost)){
-            mkdir($carpetaContPost);
-        }
-        //Generar nombre único para cada archivo
-        $nombreUnico = md5( uniqid( rand(), true)) . '.jpg';
-
+        
         //Subir la imagen
-        move_uploaded_file($archivoPost['tmp_name'], $carpetaContPost . $nombreUnico );
-
-        //Insertar en la base de datos
-        $query = "INSERT INTO post (nombreArchivo, descripcion, tags, checkSensitivo, fuentePost) VALUES ('$nombreUnico','$descripcion','$tags','$checkSensitivo','$fuentePost')";
-
-        $resultado = mysqli_query($db, $query);
-        //echo"<pre>";
-        //var_dump($resultado);
-        //echo "</pre>";
-        if($resultado){
-            header('Location: ../index.php?resultado=1');
-        }
+       move_uploaded_file($archivoPost['tmp_name'], $carpetaContPost . $nombreUnico);
+    
+        //Guardar los datos de la publicación creada
+        $publicacion->guardar();
     } else {
         echo "Hay errores";
     }
@@ -88,6 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <main>
+    <?php
+
+    ?>
     <div class="container">
         <div>
             <h2 class="d-flex justify-content-center mt-3">Crear publicación</h2>
@@ -114,13 +94,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="form-check">
-                <input class="form-check-input" value="0" type="checkbox" name="checkSensitivo" id="checkSensitivo">
+                <input class="form-check-input" type="checkbox" name="checkSensitivo" id="checkSensitivo">
                 <label class="form-check-label" for="checkSensitivo">
                     ¿Contenido sensible?
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" value="0" type="checkbox" name="fuentePost" id="fuentePost">
+                <input class="form-check-input" type="checkbox" name="fuentePost" id="fuentePost">
                 <label class="form-check-label" for="fuentePost">
                     ¿Quieres subir la fuente del post?
                 </label>

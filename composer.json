@@ -11,9 +11,8 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "Model\\" : "./models",
-            "Controller\\" : "./controllers",
-            "MVC\\" : "./"
+            "App\\" : "./class"
+            
         }
         
     }

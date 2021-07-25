@@ -1,9 +1,19 @@
 <?php
     require 'funciones.php';
     require 'config/database.php';
-    //require '../vendor/autoload.php';
+    require __DIR__ . '/../vendor/autoload.php';
     
-    use Model\Post;
+    //Conectarnos a la base de datos
+    $db = conectarDb();
+
+    use App\Post;
+
+    Post::setDB($db);
+
+    //$publicacion = new Post();
+    //echo "<pre>";
+    //var_dump($publicacion);
+    //echo "</pre>";
 
     
 ?>

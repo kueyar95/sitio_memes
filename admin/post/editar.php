@@ -18,7 +18,7 @@ $db = conectarDb();
 //echo "</pre>";
 
 //Obtener los datos de la propiedad
-$query = "SELECT * FROM post WHERE id = ${id}";
+$query = "SELECT * FROM posts WHERE id = ${id}";
 $resultado = mysqli_query($db, $query);
 $post = mysqli_fetch_assoc($resultado);
 
