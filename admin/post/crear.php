@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     //Obtener el nombre del archivo y luego agregarlo a $_POST
     $nombreArchivo = $archivoPost['name'];
-    $_POST['archivoPost'] = $nombreArchivo;
+    $_POST['archivoPost'] = $nombreUnico;
 
     //Guardar en $_POST el nombre de usuario desde $_SESSION
     $_POST['nombreUsuarioPost'] = $_SESSION['usuario'];
