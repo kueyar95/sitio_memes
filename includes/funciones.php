@@ -1,6 +1,7 @@
 <?php
     define('TEMPLATES_URL', __DIR__ . '/layout');
     define('FUNCIONES_URL', __DIR__ . 'funciones.php');
+    define('CARPETA_IMG', __DIR__ . '/../imagenes/');
 
     function incluirTemplate(string $nombre, bool $inicio = false)
     {
@@ -22,3 +23,8 @@
          exit;
     }
     
+    //Escapar el HTML
+    function sanitizar($html) : string{
+        $sanitizar = htmlspecialchars($html);
+        return $sanitizar;
+    }
