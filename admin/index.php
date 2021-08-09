@@ -19,23 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($id) {
         $publicacion = Post::find($id);
 
-        debuguear($publicacion);
-        //Elimina el archivo
-        $query = "SELECT archivoPost FROM post WHERE id = ${id}";
-        $resultado = mysqli_query($db, $query);
-        $postDelete = mysqli_fetch_assoc($resultado);
+        $publicacion->eliminar();
 
-        unlink('../imagenes/' . $postDelete['archivoPost']);
-
-        //Elimina la publicación
-        $query = "DELETE FROM post WHERE id = ${id}";
-        $resultado = mysqli_query($db, $query);
-
-        if ($resultado) {
-            header('Location: /Sitio_memes/admin?resultado=3');
-        }
     }
-}   
+}
 //Incluye template
 incluirTemplate('header');
 ?>

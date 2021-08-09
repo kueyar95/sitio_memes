@@ -25,7 +25,7 @@ class Post
 
     public function __construct($args = [])
     {
-        $this->id = $args['id'] ?? '';
+        $this->id = $args['id'] ?? null;
         $this->nombreUsuarioPost = $args['nombreUsuarioPost'] ?? '';
         $this->horaPost = date('d-m-Y H:i:s');
         $this->descripcion = $args['descripcion'] ?? '';
@@ -47,11 +47,14 @@ class Post
     }
 
     public function guardar(){
-        if($this->id){
-            $this->actualizar();
+        $resultado = '';
+        if(!is_null($this->id)){
+            
+            $resultado = $this->actualizar();
     } else{
-        $this->crear();
+        $resultado = $this->crear();
     }
+        return $resultado;
     }
     //CREAR PUBLICACION
     public function crear()
@@ -65,8 +68,9 @@ class Post
         $query = "INSERT INTO posts (${string_keys}) VALUES ('${string_values}')";
         $resultado = self::$db->query($query);
 
-        //Se coloca return $resultado para que le llegue a crear.php y pueda agarrar la variable para redirigir a index.php
-        return $resultado;
+        if ($resultado) {
+            header('Location: ../index.php?resultado=1');
+        }
     }
     //ACTUALIZAR PUBLICACION
     public function actualizar(){
@@ -77,14 +81,22 @@ class Post
             $valores[] = "{$key}='{$value}'";
         }
 
-        $query = "UPDATE posts SET join(', ', ${valores}) WHERE id = '" . self::$db->escape_string($this->id) . "' LIMIT 1 ";
+        $query = "UPDATE posts SET " . join(', ', $valores) . " WHERE id = '" . self::$db->escape_string($this->id) . "' LIMIT 1 ";
         $resultado = self::$db->query($query);
 
-        return $resultado;
+        if ($resultado) {
+            header('Location: ../index.php?resultado=2');
+        }
     }
     //ELIMINAR PUBLICACION
     public function eliminar(){
-        
+        $query = "DELETE FROM posts WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
+        $resultado = self::$db->query($query);
+
+        if ($resultado) {
+            $this->borrarArch();
+            header('Location: /Sitio_memes/admin?resultado=3');
+        }
     }
     //Identificar y unir los datos de la BD
     public function datos()
@@ -107,16 +119,20 @@ class Post
         }
         return $sanitizado;
     }
-    //Imagen
+    //ELIMINAR ARCHIVO
+    public function borrarArch(){
+        //Comprobar si existe archivo
+        $existeArch = file_exists(CARPETA_IMG . $this->archivoPost);
+        if($existeArch) {
+            $resultado = unlink(CARPETA_IMG . $this->archivoPost);
+        }
+    }
+    //IMAGEN
     public function setArchivoPost($archivoPost)
     {
         //Elimina la imagen previa si existe
-        if(isset($this->id)){
-            //Comprobar si existe archivo
-            $existeArch = file_exists(CARPETA_IMG . $this->archivoPost);
-            if($existeArch) {
-                unlink(CARPETA_IMG . $this->archivoPost);
-            }
+        if(!is_null($this->id)){
+            $this->borrarArch();
         }
         //Asignar al atributo archivoPost el nombre del archivo
         if ($archivoPost) {
@@ -124,12 +140,11 @@ class Post
         }
     }
 
-    //Validación
     public static function getErrores()
     {
         return self::$errores;
     }
-
+    //VALIDACION
     public function validar()
     {
         if (!$this->descripcion) {

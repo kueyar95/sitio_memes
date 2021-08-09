@@ -33,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //Validar los datos
     $errores = $publicacion->validar();
-
     //Revisar que el arreglo de errores esté vacío
     if (empty($errores)) {
 
@@ -45,13 +44,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         move_uploaded_file($archivoPost['tmp_name']['archivoPost'], CARPETA_IMG . $nombreUnico);
 
         //Guardar los datos de la publicación creada
-        $resultado = $publicacion->guardar();
-        
+        $publicacion->guardar();
         if ($resultado) {
             header('Location: ../index.php?resultado=1');
         }
-    } else {
-        echo "Hay errores";
     }
 }
 ?>
