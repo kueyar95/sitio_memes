@@ -1,6 +1,6 @@
 <?php
 require '../../includes/app.php';
-use App\Post;
+use Models\Post;
 estaAutenticado();
 incluirTemplate('header');
 $db = conectarDb();

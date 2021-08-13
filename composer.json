@@ -13,9 +13,11 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\" : "./class"
-            
+            "Models\\" : "./models",
+            "MVC\\" : "./",
+            "Controllers\\": "./controllers"
+
         }
-        
+
     }
 }

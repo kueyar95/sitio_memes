@@ -1,6 +1,6 @@
 <?php
 
-use App\Post;
+use Models\Post;
 
 session_start();
 require 'includes/app.php';

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Models;
 
 class Usuario extends ActiveRecord
 {

@@ -1,5 +1,5 @@
 <?php
-  use App\Usuario;
+  use Models\Usuario;
   $usuario = new Usuario;
 ?>
 

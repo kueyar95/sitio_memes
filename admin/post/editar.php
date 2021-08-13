@@ -1,7 +1,7 @@
 <?php
 require '../../includes/app.php';
 
-use App\Post;
+use Models\Post;
 
 estaAutenticado();
 

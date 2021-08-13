@@ -3,7 +3,7 @@
 require '../includes/app.php';
 estaAutenticado();
 
-use App\Post;
+use Models\Post;
 
 //Implementar un método para listar las publicaciones
 $posts = Post::all();
