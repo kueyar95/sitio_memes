@@ -20,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $publicacion = Post::find($id);
 
         $publicacion->eliminar();
-
     }
 }
 //Incluye template
@@ -29,22 +28,23 @@ incluirTemplate('header');
 <main class="container-xl">
     <div class="d-flex justify-content-center"></div>
     <h2 class="d-flex justify-content-center">Administrador de Publicaciones</h2>
-    <?php if ($resultado == 1) : ?>
-        <p class="alert alert-success d-flex justify-content-center">Publicación subida correctamente</p>
-    <?php elseif ($resultado == 2) : ?>
-        <p class="alert alert-success d-flex justify-content-center">Publicación editada correctamente</p>
-    <?php elseif ($resultado == 3) : ?>
-        <p class="alert alert-success d-flex justify-content-center">Publicación eliminada correctamente</p>
+
+    <?php
+    $mensaje = mostrarNotificaciones(intval($resultado));
+    if ($mensaje) : ?>
+        <div class="alert alert-success" role="alert">
+            <?php echo sanitizar($mensaje); ?>
+        </div>
     <?php endif; ?>
     <a href="./post/crear.php" class="btn btn-success">Crear post</a>
     <!-- Listado de publicaciones creadas por el usuario -->
     <div class="contenedor">
         <h3 class="d-flex justify-content-center">Publicaciones tuyas</h3>
         <div class="container d-flex flex-column px-0 mx-0 px-sm-0 mx-sm-0 px-lg px-xl-3 mx-xl-3">
-            
-            <?php foreach ($posts as $post):
-                
-                ?>
+
+            <?php foreach ($posts as $post) :
+
+            ?>
                 <article>
                     <!--Header de la publicación -->
                     <div>
@@ -54,7 +54,7 @@ incluirTemplate('header');
                             </a>
                             <p><?php echo $post->nombreUsuarioPost; ?></p>
                         </div>
-                        
+
                         <div class="d-flex justify-content-between">
                             <a href="#">
                                 <h3 class="mx-3"><?php echo $post->descripcion; ?></h3>

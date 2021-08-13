@@ -1,17 +1,17 @@
 <?php
 session_start();
-
-
 require 'includes/app.php';
+
 //Importante: Los requires e include se hacen en base al index del directorio raíz
 $db = conectarDb();
+
 //Autentificación
 $errores = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
   $usuarioLogin = $_POST['usuarioLogin'];
   $passwordLogin = $_POST['passwordLogin'];
-
   //echo "<pre>";
   //echo $usuarioLogin;
   //echo "<br>";
@@ -27,8 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $query = "SELECT * FROM usuarios WHERE nombreUsuario = '${usuarioLogin}'";
     $resultado = mysqli_query($db, $query);
 
-
-
     if ($resultado->num_rows) {
       //Revisar si el password es correcto
       $usuario = mysqli_fetch_assoc($resultado);
@@ -40,8 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //Llenar el arreglo de la sesión
         $_SESSION['usuario'] = $usuarioLogin;
         $_SESSION['login'] = true;
-        
-        
       } else {
         //El password es incorrecto
         $errores[] = 'La contraseña está incorrecta';
@@ -67,16 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
   <h2>Login</h2>
   <?php
-  echo "<pre>";
   var_dump($_POST);
-  var_dump($_FILES);
-  var_dump($_SESSION);
-
-  ini_set('display_errors', 1);
-  ini_set('display_startup_errors', 1);
-  error_reporting(E_ALL);
-  echo "</pre>";
-
 
   ?>
 </body>

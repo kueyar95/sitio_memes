@@ -1,12 +1,11 @@
 <?php
+
+use App\Post;
+
 session_start();
 require 'includes/app.php';
 //Importante: Los requires e include se hacen en base al index del directorio raíz
-$db = conectarDb();
-
-//Consultar
-$query = "SELECT * FROM posts";
-$resultado = mysqli_query($db, $query);
+$posts = Post::all();
 
 incluirTemplate('header', $inicio = true);
 ?>
@@ -16,7 +15,7 @@ incluirTemplate('header', $inicio = true);
   <?php incluirTemplate('sidebar_izquierda', $inicio = true); ?>
   <div class="container d-flex flex-column px-0 mx-0 px-sm-0 mx-sm-0 px-lg px-xl-3 mx-xl-3">
     <h2 class="d-flex justify-content-center">Contenido Principal</h2>
-    <?php while ($post = mysqli_fetch_assoc($resultado)) : ?>
+    <?php foreach ($posts as $post){ ?>
       <article class="mt-5">
         <div>
           <div class="header_post d-flex mx-2">
@@ -25,13 +24,13 @@ incluirTemplate('header', $inicio = true);
             </a>
             <p>Author del post</p>
           </div>
-          <a href="./post.php?id=<?php echo $post['id']; ?>">
-            <h3 class="mx-3"><?php echo $post['descripcion']; ?></h3>
+          <a href="./post.php?id=<?php echo $post->id; ?>">
+            <h3 class="mx-3"><?php echo $post->descripcion; ?></h3>
           </a>
         </div>
-        <a href="./post.php?id=<?php echo $post['id']; ?>">
+        <a href="./post.php?id=<?php echo $post->id; ?>">
         <div class="post_container bg-secondary d-flex justify-content-center">
-          <img src="./imagenes/<?php echo $post['archivoPost']; ?>" class="img-fluid" alt="meme" />
+          <img src="./imagenes/<?php echo $post->archivoPost; ?>" class="img-fluid" alt="meme" />
         </div>
         </a>
         <div class="mt-2 post_afterbar border rounded rounded-lg">
@@ -49,7 +48,7 @@ incluirTemplate('header', $inicio = true);
           </button>
         </div>
       </article>
-    <?php endwhile; ?>
+    <?php } ?>
     <hr />
 
 

@@ -1,5 +1,3 @@
-
-
 <div class="form-group">
     <label for="archivoPost">Seleccionar archivo</label>
     <input type="file" class="form-control-file" id="archivoPost" name="publicacion[archivoPost]" accept="image/png, .jpeg, .jpg, image/gif">

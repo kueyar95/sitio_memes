@@ -1,3 +1,9 @@
+<?php
+  use App\Usuario;
+  $usuario = new Usuario;
+?>
+
+<!-- Modal Login -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -8,10 +14,9 @@
         </button>
       </div>
       <div class="modal-body">
-        
-        <form method="POST" id="formLogin" action="./login.php">
+        <!-- Formulario Login -->
+        <form id="formLogin" action="./login.php">
           <div class="form-group">
-
             <label for="usuarioLogin">Usuario</label>
             <input type="text" class="form-control" id="usuarioLogin" name="usuarioLogin">
           </div>
@@ -25,17 +30,14 @@
             <label class="form-check-label" for="exampleCheck1">No olvidar</label>
             <a href="#" data-toggle="modal" data-dismiss="modal" data-target="#registerModal">Registrarse</a>
           </div>
-
           <br>
           <button type="submit" class="btn btn-primary" id="btnLogin">Entrar</button>
-
         </form>
       </div>
     </div>
   </div>
 </div>
-
-<!-- Modal -->
+<!-- Modal Register -->
 <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -46,39 +48,34 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <!-- Formulario Register -->
+        <form id="formRegister" action="./register.php">
           <div class="form-group">
             <label for="usuarioRegister">Usuario</label>
-            <input type="email" class="form-control" id="usuarioRegister" aria-describedby="emailHelp">
-
+            <input type="text" class="form-control" id="usuarioRegister" name="usuario[nombreUsuario]" value="<?php echo sanitizar($usuario->nombreUsuario); ?>">
           </div>
-
           <div class="form-group">
-            <label for="emailRegister">Correo</label>
-            <input type="email" class="form-control" id="emailRegister" aria-describedby="emailHelp">
+            <label for="email">Correo</label>
+            <input type="email" class="form-control" id="emailRegister" aria-describedby="emailHelp" name="usuario[email]" value="<?php echo sanitizar($usuario->email); ?>">
             <small id="emailHelp" class="form-text text-muted">Nosotros no compartiremos tu correo con nadie.</small>
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Contraseña</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label for="claveUsuario">Contraseña</label>
+            <input type="password" class="form-control" id="passwordRegister" name="usuario[claveUsuario]" value="<?php echo sanitizar($usuario->claveUsuario); ?>">
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Confirmar contraseña</label>
-            <input type="password" class="form-control" id="exampleInputPassword2">
+            <label for="passwordConf">Confirmar contraseña</label>
+            <input type="password" class="form-control" id="passwordConf" name="passwordConf">
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
+            <input class="form-check-input" type="checkbox" value="" id="CheckTerm" name="CheckTerm">
+            <label class="form-check-label" for="CheckTerm">
               Acepto las condiciones de uso y privacidad
             </label>
           </div>
           <br>
-
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary" id="btnRegister">Registrarse</button>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>

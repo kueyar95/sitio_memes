@@ -1,22 +1,20 @@
-<?php include_once './inc/layout/header.php' ?>
-<main>
-    <form >
-    <div class="form-group">
-        <label for="exampleInputEmail1">Email</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <small id="emailHelp" class="form-text text-muted">Nosotros no compartiremos tu correo con nadie.</small>
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Contraseña</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Cerrar sesión al salir</label>
-        <br>
-        <a href="register.php">Crear cuenta</a>
-    </div>
-    <button type="submit" class="btn btn-primary">Entrar</button>
-    </form>
-</main>
-<?php include_once './inc/layout/footer.php' ?>
+<?php
+session_start();
+require 'includes/app.php';
+//Importante: Los requires e include se hacen en base al index del directorio raíz
+
+use App\Usuario;
+
+//Instanciar la clase Usuario
+$usuario = new Usuario;
+
+//Arreglo con errores
+$errores = Usuario::getErrores();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $usuario = new Usuario($_POST['usuario']);
+    $nombreUsuario = $usuario->nombreUsuario;
+    $_SESSION['usuario'] = $nombreUsuario;
+    $_SESSION['login'] = true;
+    $usuario->guardar();
+}

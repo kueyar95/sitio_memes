@@ -12,8 +12,8 @@
         session_start();
 
         if(!$_SESSION['login']) {
-            header('Location: /Sitio_memes/');    
-        } 
+            header('Location: /Sitio_memes/');
+        }
     }
 
     function debuguear($variable){
@@ -22,9 +22,30 @@
          echo "</pre>";
          exit;
     }
-    
+
     //Escapar el HTML
     function sanitizar($html) : string{
         $sanitizar = htmlspecialchars($html);
         return $sanitizar;
+    }
+
+    //Notificaciones
+    function mostrarNotificaciones($codigo){
+        $notificacion = '';
+
+        switch($codigo) {
+            case 1:
+                $notificacion = 'Creado correctamente';
+                break;
+            case 2:
+                $notificacion = 'Actualizado correctamente';
+                break;
+            case 3:
+                $notificacion = 'Eliminado correctamente';
+                break;
+            default:
+                $notificacion = false;
+                break;
+        }
+        return $notificacion;
     }

@@ -19,7 +19,6 @@ $auth = $_SESSION['login'] ?? false;
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <title>Sitio memes</title>
 </head>
-
 <body>
   <header>
     <nav class="navbar navbar-expand-md justify-content-between navbar-light bg-light">
@@ -47,8 +46,6 @@ $auth = $_SESSION['login'] ?? false;
             <?php else : ?>
               <a class="nav-link" data-toggle="modal" data-target="#loginModal">Iniciar Sesión</a>
             <?php endif; ?>
-
-
           </div>
         </div>
       </div>
