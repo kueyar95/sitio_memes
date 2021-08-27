@@ -31,7 +31,6 @@ class ActiveRecord {
     {
         //Sanitizar los datos
         $datos = $this->sanitizarDatos();
-
         $string_keys = join(', ', array_keys($datos));
         $string_values = join("', '", array_values($datos));
         //Insertar en la base de datos
@@ -39,7 +38,7 @@ class ActiveRecord {
         $resultado = self::$db->query($query);
 
         if ($resultado) {
-            header('Location: admin\index.php?resultado=1');
+            header('Location: /admin?resultado=1');
         }
     }
     //ACTUALIZAR PUBLICACION
@@ -55,7 +54,7 @@ class ActiveRecord {
         $resultado = self::$db->query($query);
 
         if ($resultado) {
-            header('Location: ../index.php?resultado=2');
+            header('Location: admin?resultado=2');
         }
     }
     //ELIMINAR PUBLICACION
@@ -65,7 +64,7 @@ class ActiveRecord {
 
         if ($resultado) {
             $this->borrarArch();
-            header('Location: /Sitio_memes/admin?resultado=3');
+            header('Location: admin?resultado=3');
         }
     }
     //Identificar y unir los datos de la BD

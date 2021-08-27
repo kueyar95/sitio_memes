@@ -15,22 +15,17 @@ function loginForm(e) {
   }).then((res) => {
     console.log(res);
       if(res.ok){
-        window.location.href = '/Sitio_memes/admin/';
+        window.location.href = '/admin';
       }
     })
 }
 
 function registerForm(e) {
-  e.preventDefault();
+  
   fetch(this.getAttribute('action'), {
     method: "POST",
     body: new FormData(this),
-  }).then((res) => {
-   if(res.ok){
-     window.location.href = '/Sitio_memes/admin/index.php?resultado=1';
-   }
-  })
-}
+  })}
 
 function imprimirAlerta(mensaje, tipo) {
   //Crear el div

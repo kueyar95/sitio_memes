@@ -48,4 +48,19 @@ class Post extends ActiveRecord
         }
         return self::$errores;
     }
+    public function crear()
+    {
+        //Sanitizar los datos
+        $datos = $this->sanitizarDatos();
+
+        $string_keys = join(', ', array_keys($datos));
+        $string_values = join("', '", array_values($datos));
+        //Insertar en la base de datos
+        $query = "INSERT INTO " . static::$tabla . " (${string_keys}) VALUES ('${string_values}')";
+        $resultado = self::$db->query($query);
+
+        if ($resultado) {
+            header('Location: admin?resultado=1');
+        }
+    }
 }

@@ -1,41 +1,24 @@
-<?php
-//Importar la conexión
-require '../includes/app.php';
-estaAutenticado();
-
-use Models\Post;
-
-//Implementar un método para listar las publicaciones
-$posts = Post::all();
-
-
-//Eliminar publicación
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
-}
-//Incluye template
-incluirTemplate('header');
-?>
 <main class="container-xl">
     <div class="d-flex justify-content-center"></div>
     <h2 class="d-flex justify-content-center">Administrador de Publicaciones</h2>
 
     <?php
-    $mensaje = mostrarNotificaciones(intval($resultado));
-    if ($mensaje) : ?>
-        <div class="alert alert-success" role="alert">
-            <?php echo sanitizar($mensaje); ?>
-        </div>
-    <?php endif; ?>
-    <a href="./post/crear.php" class="btn btn-success">Crear post</a>
+    if($resultado){
+        $mensaje = mostrarNotificaciones(intval($resultado));
+        if ($mensaje) { ?>
+            <div class="alert alert-success" role="alert">
+                <?php echo sanitizar($mensaje); ?>
+            </div>
+    <?php } } ?>
+
+
+    <a href="crear" class="btn btn-success">Crear post</a>
     <!-- Listado de publicaciones creadas por el usuario -->
     <div class="contenedor">
         <h3 class="d-flex justify-content-center">Publicaciones tuyas</h3>
         <div class="container d-flex flex-column px-0 mx-0 px-sm-0 mx-sm-0 px-lg px-xl-3 mx-xl-3">
 
-            <?php foreach ($posts as $post) :
-
-            ?>
+            <?php foreach ($posts as $post) : ?>
                 <article>
                     <!--Header de la publicación -->
                     <div>
@@ -56,13 +39,13 @@ incluirTemplate('header');
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <li>
-                                        <form method="POST" class="mx-2">
+                                        <form method="POST" class="mx-2" action="/posts/eliminar">
                                             <input type="hidden" name="id" value="<?php echo $post->id; ?>">
                                             <input type="submit" class="border-0 bg-white" value="Eliminar">
                                         </form>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="./post/editar.php?id=<?php echo $post->id; ?>">Editar</a>
+                                        <a class="dropdown-item" href="/posts/editar?id=<?php echo $post->id; ?>">Editar</a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="#">Descargar</a>
@@ -90,16 +73,9 @@ incluirTemplate('header');
                             <i class="fas fa-share-alt"></i>
                         </button>
                     </div>
-
                 </article>
             <?php endforeach; ?>
         </div>
     </div>
 
 </main>
-<?php
-//Cerrar la conexión a la BD
-mysqli_close($db);
-//Incluir template
-incluirTemplate('footer');
-?>
